@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <h1>
+        {{ element }}
+    </h1>
+    {% for name, value in element.get_fields %}
+      <div class="row">
+        <div class="col s3">
+            <h5>{{ name }}</h5>
+        </div>
+        <div class="col s9">
+            {{ value }}
+        </div>
+      </div>
+    {% endfor %}
+{% endblock %}
