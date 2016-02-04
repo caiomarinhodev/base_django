@@ -9,6 +9,8 @@ from . import conf as base_conf
 class BaseCreateView(generic.CreateView):
     template_name = "base/create.html"
 
+class BaseUpdateView(generic.UpdateView):
+    template_name = "base/update.html"
 
 class BaseListView(generic.ListView):
     template_name = "base/list.html"
