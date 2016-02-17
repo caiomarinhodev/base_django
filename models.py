@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 
-from django.db import models
+from django.db import models, IntegrityError
 from django.utils.text import slugify
 from utils import utils
 # Create your models here.
@@ -58,6 +58,8 @@ class FullSlugBaseModel(BaseModel):
              update_fields=None):
         if not self.slug:
             self.slug = slugify(self.name)
-            if self.objects.filter(slug=self.slug):
+            try:
+                return super(FullSlugBaseModel, self).save(force_insert, force_update, using, update_fields)
+            except IntegrityError:
                 self.slug = self.slug + "-" + utils.generate_random_string(4)
         return super(FullSlugBaseModel, self).save(force_insert, force_update, using, update_fields)
