@@ -10,8 +10,9 @@ class BaseModel(models.Model):
         return [(field.name, field.value_to_string(self)) for field in self._meta.fields]
 
 
+
 class SimpleBaseModel(BaseModel):
-    name = models.CharField(max_length=30, blank=True)
+    name = models.CharField(max_length=100, blank=True)
     description = models.TextField(blank=True)
 
     class Meta:
@@ -33,7 +34,7 @@ class RemovableBaseModel(ModifiableBaseModel):
 
 
 class FullBaseModel(BaseModel):
-    name = models.CharField(max_length=30, blank=True)
+    name = models.CharField(max_length=100, blank=True)
     description = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -44,7 +45,7 @@ class FullBaseModel(BaseModel):
 
 
 class FullSlugBaseModel(BaseModel):
-    name = models.CharField(max_length=30, blank=True)
+    name = models.CharField(max_length=100, blank=True)
     description = models.TextField(blank=True)
     slug = models.SlugField(blank=True, unique=True)
     created = models.DateTimeField(auto_now_add=True)
