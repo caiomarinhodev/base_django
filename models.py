@@ -16,6 +16,7 @@ class BaseModel(models.Model):
         return [(field.name, field.value_to_string(self)) for field in self._meta.fields]
 
 
+
 class SimpleBaseModel(BaseModel):
     """
     Simple model model, includes a name and description
