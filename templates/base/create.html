@@ -12,7 +12,7 @@
                 {%  if input|is_checkbox %}
                     <div class="col s12">
                         {{ input }}
-                        <label for="{{ element.auto_id }}">{{ element.label }}</label>
+                        <label for="{{ input.auto_id }}">{{ input.label }}</label>
                     </div>
                 {% elif input|is_select%}
 

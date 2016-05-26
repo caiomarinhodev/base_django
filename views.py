@@ -1,3 +1,4 @@
+#! -*- coding: UTF-8 -*-
 from django.views import generic
 from django.core import paginator
 
@@ -7,17 +8,34 @@ from . import conf as base_conf
 
 
 class BaseCreateView(generic.CreateView):
+    """
+    View based on CreateView from django.views.generic.
+    Use a custom template for a form display
+    """
     template_name = "base/create.html"
 
 class BaseUpdateView(generic.UpdateView):
+    """
+    View based on Update from django.views.generic.
+    Use a custom template for a form display
+    """
     template_name = "base/update.html"
 
 class BaseListView(generic.ListView):
+    """
+    View based on ListView from django.views.generic.
+    Use a custom template for iterate a list
+    """
     template_name = "base/list.html"
     context_object_name = "list"
 
 
 class BasePaginationListView(generic.ListView):
+    """
+    View based on ListView from django.views.generic.
+    Use a custom template for iterate a list.
+    Uses django.core.paginator to slice the result in pages
+    """
     template_name = "base/pagination_list.html"
     context_object_name = "list"
 
@@ -44,9 +62,17 @@ class BasePaginationListView(generic.ListView):
 
 
 class BaseGridView(BaseListView):
+    """
+    View based on ListView from django.views.generic.
+    Use a custom template for iterate a list in a grid
+    """
     template_name = "base/grid.html"
 
 
 class BaseDetailView(generic.DetailView):
+    """
+    View based on DetailView from django.views.generic.
+    Shows all attributes and values of an object
+    """
     template_name = "base/detail.html"
     context_object_name = "element"
