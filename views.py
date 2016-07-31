@@ -1,6 +1,7 @@
 #! -*- coding: UTF-8 -*-
 from django.views import generic
 from django.core import paginator
+from django.contrib.admin.utils import NestedObjects
 
 from . import conf as base_conf
 
@@ -76,3 +77,19 @@ class BaseDetailView(generic.DetailView):
     """
     template_name = "base/detail.html"
     context_object_name = "element"
+
+class EliminarContingencia(generic.DeleteView):
+    """
+    Eliminación de una contingencia por parte de un administrador
+    """
+    template_name = "activos/eliminar-contingencia.html"
+    context_object_name = "object"
+
+    def get_context_data(self, **kwargs):
+        context = super(EliminarContingencia, self).get_context_data(**kwargs)
+
+        collector = NestedObjects(using='default')
+        collector.collect([self.get_object()])
+        context['deleted_objects'] = collector.nested()
+
+        return context
