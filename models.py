@@ -15,6 +15,8 @@ class BaseModel(models.Model):
         """
         return [(field.name, field.value_to_string(self)) for field in self._meta.fields]
 
+    def __unicode__(self):
+        return self.name
 
 
 class SimpleBaseModel(BaseModel):
@@ -27,6 +29,8 @@ class SimpleBaseModel(BaseModel):
     class Meta:
         abstract = True
 
+    def __unicode__(self):
+        return self.name
 
 class ModifiableBaseModel(BaseModel):
     """
@@ -38,6 +42,9 @@ class ModifiableBaseModel(BaseModel):
     class Meta:
         abstract = True
 
+    def __unicode__(self):
+        return self.name
+
 class RemovableBaseModel(ModifiableBaseModel):
     """
     Simple base model, to check active objects, include an active flag
@@ -47,6 +54,8 @@ class RemovableBaseModel(ModifiableBaseModel):
     class Meta:
         abstract = True
 
+    def __unicode__(self):
+        return self.name
 
 class FullBaseModel(BaseModel):
     """
@@ -60,6 +69,9 @@ class FullBaseModel(BaseModel):
 
     class Meta:
         abstract = True
+
+    def __unicode__(self):
+        return self.name
 
 
 class FullSlugBaseModel(BaseModel):
@@ -97,3 +109,6 @@ class FullSlugBaseModel(BaseModel):
             except IntegrityError:
                     self.slug = self.slug[:-4] + "-" + utils.generate_random_string(4)
         return saved_object
+
+    def __unicode__(self):
+        return self.name
