@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models, IntegrityError
 from django.utils.text import slugify
-from utils import utils
+from . import utils
 # Create your models here.
 class BaseModel(models.Model):
     """
