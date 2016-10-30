@@ -15,9 +15,6 @@ class BaseModel(models.Model):
         """
         return [(field.name, field.value_to_string(self)) for field in self._meta.fields]
 
-    def __unicode__(self):
-        return self.name
-
 
 class SimpleBaseModel(BaseModel):
     """
@@ -43,7 +40,7 @@ class ModifiableBaseModel(BaseModel):
         abstract = True
 
     def __unicode__(self):
-        return self.name
+        return unicode(self.created)
 
 class RemovableBaseModel(ModifiableBaseModel):
     """
