@@ -2,7 +2,8 @@
 {% load i18n %}
 {% load input_checker %}
 {% block content %}
-    <form method="POST">
+    <h1>{% trans 'Update' %}{{ model_name }}</h1>
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% for input in form %}
             <div class="row">

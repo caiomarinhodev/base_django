@@ -15,12 +15,30 @@ class BaseCreateView(generic.CreateView):
     """
     template_name = "base/create.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(BaseCreateView, self).get_context_data(**kwargs)
+
+        if self.model:
+            context['model_name'] = self.model._meta.verbose_name.title()
+            context['model_name_plural'] = self.model._meta.verbose_name_plural.title()
+
+        return context
+
 class BaseUpdateView(generic.UpdateView):
     """
     View based on Update from django.views.generic.
     Use a custom template for a form display
     """
     template_name = "base/update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(BaseUpdateView, self).get_context_data(**kwargs)
+
+        if self.model:
+            context['model_name'] = self.model._meta.verbose_name.title()
+            context['model_name_plural'] = self.model._meta.verbose_name_plural.title()
+
+        return context
 
 class BaseListView(generic.ListView):
     """
@@ -29,6 +47,15 @@ class BaseListView(generic.ListView):
     """
     template_name = "base/list.html"
     context_object_name = "list"
+
+    def get_context_data(self, **kwargs):
+        context = super(BaseListView, self).get_context_data(**kwargs)
+
+        if len(self.get_queryset()) > 0:
+            context['model_name'] = self.get_queryset()[0]._meta.verbose_name.title()
+            context['model_name_plural'] = self.get_queryset()[0]._meta.verbose_name_plural.title()
+
+        return context
 
 
 class BasePaginationListView(generic.ListView):
@@ -59,6 +86,12 @@ class BasePaginationListView(generic.ListView):
         except paginator.EmptyPage:
             context['list'] = pager.page(pager.num_pages)
 
+        if len(self.get_queryset()) > 0:
+            context['model_name'] = self.get_queryset()[0]._meta.verbose_name.title()
+            context['model_name_plural'] = self.get_queryset()[0]._meta.verbose_name_plural.title()
+
+        print context
+
         return context
 
 
@@ -78,18 +111,33 @@ class BaseDetailView(generic.DetailView):
     template_name = "base/detail.html"
     context_object_name = "element"
 
-class EliminarContingencia(generic.DeleteView):
+    def get_context_data(self, **kwargs):
+        context = super(BaseDetailView, self).get_context_data(**kwargs)
+
+        if self.model:
+            context['model_name'] = self.model._meta.verbose_name.title()
+            context['model_name_plural'] = self.model._meta.verbose_name_plural.title()
+
+        return context
+
+
+class BaseDeleteView(generic.DeleteView):
     """
-    Eliminación de una contingencia por parte de un administrador
+    View based on Delete view from django.views.generic
+    Show a list with all elements to be delete and delete it on post
     """
-    template_name = "activos/eliminar-contingencia.html"
+    template_name = "base/delete.html"
     context_object_name = "object"
 
     def get_context_data(self, **kwargs):
-        context = super(EliminarContingencia, self).get_context_data(**kwargs)
+        context = super(BaseDeleteView, self).get_context_data(**kwargs)
 
         collector = NestedObjects(using='default')
         collector.collect([self.get_object()])
         context['deleted_objects'] = collector.nested()
+
+        if self.model:
+            context['model_name'] = self.model._meta.verbose_name.title()
+            context['model_name_plural'] = self.model._meta.verbose_name_plural.title()
 
         return context
