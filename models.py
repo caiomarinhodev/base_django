@@ -82,8 +82,7 @@ class FullSlugBaseModel(BaseModel):
     modified = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
     SLUG_RANDOM_CHARS = 20
-
-    SLUG_RANDOM_CHARS = 4
+    MAX_RANDOM_TRIES = 5
 
     class Meta:
         abstract = True
@@ -102,12 +101,20 @@ class FullSlugBaseModel(BaseModel):
             self.slug = slugify(self.name)
         successful_save = False
         saved_object = None
-        while not successful_save:
+        index_iterations = 0
+        while not successful_save and index_iterations < self.MAX_RANDOM_TRIES:
+            index_iterations += 1
             try:
                 saved_object = super(FullSlugBaseModel, self).save(force_insert, force_update, using, update_fields)
                 successful_save = True
-            except IntegrityError:
+            except IntegrityError, e:
+                if len(self.slug)+self.SLUG_RANDOM_CHARS > 150:
                     self.slug = self.slug[:-self.SLUG_RANDOM_CHARS] + "-" + utils.generate_random_string(self.SLUG_RANDOM_CHARS)
+                else:
+                    self.slug = self.slug + "-" + utils.generate_random_string(self.SLUG_RANDOM_CHARS)
+
+                if index_iterations == self.MAX_RANDOM_TRIES:
+                    raise e
         return saved_object
 
     def __unicode__(self):
