@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models, IntegrityError
 from django.utils.text import slugify
-from utils import utils
+from . import utils
 # Create your models here.
 class BaseModel(models.Model):
     """
@@ -16,7 +16,6 @@ class BaseModel(models.Model):
         return [(field.name, field.value_to_string(self)) for field in self._meta.fields]
 
 
-
 class SimpleBaseModel(BaseModel):
     """
     Simple model model, includes a name and description
@@ -27,6 +26,8 @@ class SimpleBaseModel(BaseModel):
     class Meta:
         abstract = True
 
+    def __unicode__(self):
+        return self.name
 
 class ModifiableBaseModel(BaseModel):
     """
@@ -38,6 +39,9 @@ class ModifiableBaseModel(BaseModel):
     class Meta:
         abstract = True
 
+    def __unicode__(self):
+        return unicode(self.created)
+
 class RemovableBaseModel(ModifiableBaseModel):
     """
     Simple base model, to check active objects, include an active flag
@@ -47,6 +51,8 @@ class RemovableBaseModel(ModifiableBaseModel):
     class Meta:
         abstract = True
 
+    def __unicode__(self):
+        return self.name
 
 class FullBaseModel(BaseModel):
     """
@@ -61,6 +67,9 @@ class FullBaseModel(BaseModel):
     class Meta:
         abstract = True
 
+    def __unicode__(self):
+        return self.name
+
 
 class FullSlugBaseModel(BaseModel):
     """
@@ -73,6 +82,8 @@ class FullSlugBaseModel(BaseModel):
     modified = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
     SLUG_RANDOM_CHARS = 20
+
+    SLUG_RANDOM_CHARS = 4
 
     class Meta:
         abstract = True
@@ -98,3 +109,6 @@ class FullSlugBaseModel(BaseModel):
             except IntegrityError:
                     self.slug = self.slug[:-self.SLUG_RANDOM_CHARS] + "-" + utils.generate_random_string(self.SLUG_RANDOM_CHARS)
         return saved_object
+
+    def __unicode__(self):
+        return self.name
