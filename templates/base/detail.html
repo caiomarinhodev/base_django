@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block content %}
     <h1>
-        {{ element }} {% trans 'Of class' %}{{ model_name }}
+        {{ element }} {% trans 'Of class' %} {{ model_name }}
     </h1>
     {% for name, value in element.get_fields %}
       <div class="row">

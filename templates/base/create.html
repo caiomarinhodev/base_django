@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load input_checker %}
 {% block content %}
-    <h1>{% trans 'Create' %}{{ model_name }}</h1>
+    <h1>{% trans 'Create' %} {{ model_name }}</h1>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% for input in form %}
