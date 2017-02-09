@@ -9,8 +9,8 @@
             <div class="row">
                 {%  if input|is_checkbox %}
                     <div class="col s12">
-                        {{ element }}
-                        <label for="{{ element.auto_id }}">{{ element.label }}</label>
+                        {{ input }}
+                        <label for="{{ input.auto_id }}">{{ input.label }}</label>
                     </div>
                 {% elif input|is_select%}
                     <div class="row">
