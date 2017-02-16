@@ -82,11 +82,11 @@ class BasePaginationListView(generic.ListView):
             end_index = min(recordings.number+3, (len(queryset)/recordings_by_page)+1)
             print(start_index, end_index, len(queryset))
             context['range'] = range(start_index, end_index+1)
-            context['list'] = recordings
+            context[self.context_object_name] = recordings
         except paginator.PageNotAnInteger:
-            context['list'] = pager.page(1)
+            context[self.context_object_name] = pager.page(1)
         except paginator.EmptyPage:
-            context['list'] = pager.page(pager.num_pages)
+            context[self.context_object_name] = pager.page(pager.num_pages)
 
         if len(self.get_queryset()) > 0:
             context['model_name'] = self.get_queryset()[0]._meta.verbose_name.title()
