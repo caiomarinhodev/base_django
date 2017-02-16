@@ -6,7 +6,7 @@ Global variables for base module
 """
 
 # Items by page on paginator views
-ITEMS_BY_PAGE = 50
+ITEMS_BY_PAGE = 6
 
 CREATE_SUFFIX = "_create"
 LIST_SUFFIX = "_list"
