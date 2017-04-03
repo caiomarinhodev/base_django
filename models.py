@@ -4,6 +4,8 @@ from django.db import models, IntegrityError
 from django.utils.text import slugify
 from . import utils
 # Create your models here.
+
+
 class BaseModel(models.Model):
     """
     Default base models
@@ -107,7 +109,7 @@ class FullSlugBaseModel(BaseModel):
             try:
                 saved_object = super(FullSlugBaseModel, self).save(force_insert, force_update, using, update_fields)
                 successful_save = True
-            except IntegrityError, e:
+            except IntegrityError as e:
                 if len(self.slug)+self.SLUG_RANDOM_CHARS > 150:
                     self.slug = self.slug[:-self.SLUG_RANDOM_CHARS] + "-" + utils.generate_random_string(self.SLUG_RANDOM_CHARS)
                 else:

@@ -24,6 +24,7 @@ class BaseCreateView(generic.CreateView):
 
         return context
 
+
 class BaseUpdateView(generic.UpdateView):
     """
     View based on Update from django.views.generic.
@@ -39,6 +40,7 @@ class BaseUpdateView(generic.UpdateView):
             context['model_name_plural'] = self.model._meta.verbose_name_plural.title()
 
         return context
+
 
 class BaseListView(generic.ListView):
     """
@@ -80,7 +82,6 @@ class BasePaginationListView(generic.ListView):
 
             start_index = max(1, recordings.number-3)
             end_index = min(recordings.number+3, (len(queryset)/recordings_by_page)+1)
-            print(start_index, end_index, len(queryset))
             context['range'] = range(start_index, end_index+1)
             context[self.context_object_name] = recordings
         except paginator.PageNotAnInteger:
@@ -91,8 +92,6 @@ class BasePaginationListView(generic.ListView):
         if len(self.get_queryset()) > 0:
             context['model_name'] = self.get_queryset()[0]._meta.verbose_name.title()
             context['model_name_plural'] = self.get_queryset()[0]._meta.verbose_name_plural.title()
-
-        print context
 
         return context
 
