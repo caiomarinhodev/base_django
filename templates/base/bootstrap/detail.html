@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <h1>
+        {{ element }} {% trans 'Of class' %} {{ model_name }}
+    </h1>
+    {% for name, value in element.get_fields %}
+      <div class="row">
+        <div class="col-xs-3">
+            <h5>{{ name }}</h5>
+        </div>
+        <div class="col-xs-9">
+            {{ value }}
+        </div>
+      </div>
+    {% endfor %}
+{% endblock %}
