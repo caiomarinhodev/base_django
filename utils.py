@@ -26,6 +26,7 @@ def unicode_csv_reader(unicode_csv_data, dialect=csv.excel, **kwargs):
         # decode UTF-8 back to Unicode, cell by cell:
         yield [unicode(cell, 'utf-8') for cell in row]
 
+
 def utf_8_encoder(unicode_csv_data):
     """
     UTF-8 Encoder
