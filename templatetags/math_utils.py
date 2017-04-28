@@ -5,9 +5,9 @@ register = template.Library()
 
 @register.filter(name="abs")
 def abs_value(value):
-    return abs(value)
+    return abs(int(value))
 
 
 @register.filter(name="is_negative")
 def is_negative(value):
-    return value < 0
+    return int(value) < 0
