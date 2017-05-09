@@ -6,6 +6,16 @@ from django import template
 register = template.Library()
 
 
+@register.filter(name="is_select_multiple")
+def is_select_multiple(field):
+    """
+    Template tag to check if input is select
+    :param field: Input field
+    :return: True if is select, False if not
+    """
+    return "SelectMultiple" in field.field.widget.__class__.__name__
+
+
 @register.filter(name="is_select")
 def is_select(field):
     """
@@ -14,6 +24,7 @@ def is_select(field):
     :return: True if is select, False if not
     """
     return "Select" in field.field.widget.__class__.__name__
+
 
 @register.filter(name="is_checkbox")
 def is_checkbox(field):
@@ -24,6 +35,7 @@ def is_checkbox(field):
     """
     return field.field.widget.__class__.__name__ == "CheckboxInput"
 
+
 @register.filter('is_datetime')
 def is_datetime(input):
     """
@@ -32,6 +44,7 @@ def is_datetime(input):
     :return: True if is datetime, False if not
     """
     return input.field.widget.__class__.__name__ == "DateTimeInput"
+
 
 @register.filter('is_file')
 def is_file(input):
