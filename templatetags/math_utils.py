@@ -6,6 +6,8 @@ register = template.Library()
 @register.filter(name="abs")
 def abs_value(value):
     value = remove_comma_separator(value)
+    if not value:
+        value = 0
     return format(abs(int(value)), ",d")
 
 
