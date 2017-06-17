@@ -2,6 +2,7 @@ import random
 import string
 import csv
 
+
 def generate_random_string(n):
     """
     Generates a random string of length n
@@ -24,7 +25,7 @@ def unicode_csv_reader(unicode_csv_data, dialect=csv.excel, **kwargs):
                             dialect=dialect, **kwargs)
     for row in csv_reader:
         # decode UTF-8 back to Unicode, cell by cell:
-        yield [unicode(cell, 'utf-8') for cell in row]
+        yield [str(cell, 'utf-8') for cell in row]
 
 
 def utf_8_encoder(unicode_csv_data):
