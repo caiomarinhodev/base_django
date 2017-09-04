@@ -29,6 +29,9 @@
                         {% elif input|is_file%}
                                 <label>{{ input.label }}</label>
                                 {{ input }}
+                        {% elif input|is_text_area%}
+                                <label for="{{ input.name }}">{{ input.label }}</label><br>
+                                {{ input }}
                         {% else %}
 
                                 <label for="{{ input.name }}">{{ input.label }}</label>

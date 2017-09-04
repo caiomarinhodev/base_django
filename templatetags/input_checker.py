@@ -53,4 +53,14 @@ def is_file(input):
     :param input:  Input field
     :return: True if  is file, False if not
     """
-    return input.field.widget.__class__.__name__ == "ClearableFileInput"
+    return input.field.widget.__class__.__name__ == "ClearableFileInput"\
+
+
+@register.filter('is_text_area')
+def is_text_area(input):
+    """
+    Template tag to check if input is file
+    :param input:  Input field
+    :return: True if  is file, False if not
+    """
+    return input.field.widget.__class__.__name__ == "Textarea"

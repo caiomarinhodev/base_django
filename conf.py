@@ -12,7 +12,7 @@ CREATE_SUFFIX = "_create"
 LIST_SUFFIX = "_list"
 DETAIL_SUFFIX = "_detail"
 UPDATE_SUFFIX = "_update"
-DELETE_SUFFIX = "delete"
+DELETE_SUFFIX = "_delete"
 
 # style = "materialize"
 style = "bootstrap"

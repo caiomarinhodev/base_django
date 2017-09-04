@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load input_checker %}
 {% block content %}
-    <h1>{% trans 'Create' %} {{ model_name }}</h1>
+    <h1>{% trans 'Update' %} {{ model_name }}</h1>
     <div class="row">
         <div class="col-xs-12">
 
@@ -28,6 +28,9 @@
                             {{ input }}
                         {% elif input|is_file%}
                                 <label>{{ input.label }}</label>
+                                {{ input }}
+                        {% elif input|is_text_area%}
+                                <label for="{{ input.name }}">{{ input.label }}</label><br>
                                 {{ input }}
                         {% else %}
 
