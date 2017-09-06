@@ -28,8 +28,9 @@ class SimpleBaseModel(BaseModel):
     class Meta:
         abstract = True
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
+
 
 class ModifiableBaseModel(BaseModel):
     """
@@ -41,8 +42,9 @@ class ModifiableBaseModel(BaseModel):
     class Meta:
         abstract = True
 
-    def __unicode__(self):
-        return unicode(self.created)
+    def __str__(self):
+        return str(self.created)
+
 
 class RemovableBaseModel(ModifiableBaseModel):
     """
@@ -53,8 +55,9 @@ class RemovableBaseModel(ModifiableBaseModel):
     class Meta:
         abstract = True
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
+
 
 class FullBaseModel(BaseModel):
     """
@@ -69,7 +72,7 @@ class FullBaseModel(BaseModel):
     class Meta:
         abstract = True
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -119,5 +122,5 @@ class FullSlugBaseModel(BaseModel):
                     raise e
         return saved_object
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
