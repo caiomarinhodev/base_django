@@ -31,6 +31,7 @@ class BaseUpdateView(generic.UpdateView):
     Use a custom template for a form display
     """
     template_name = "base/%s/update.html" % base_conf.style
+    context_object_name = "elementcd "
 
     def get_context_data(self, **kwargs):
         context = super(BaseUpdateView, self).get_context_data(**kwargs)
