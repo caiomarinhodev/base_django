@@ -10,6 +10,10 @@ class BaseModel(models.Model):
     """
     Default base models
     """
+
+    class Meta:
+        abstract = True
+
     def get_fields(self):
         """
         Iterates over the model and return all fields and values
