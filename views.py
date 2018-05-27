@@ -2,6 +2,7 @@
 from django.views import generic
 from django.core import paginator
 from django.contrib.admin.utils import NestedObjects
+from django.contrib import messages
 
 from . import conf as base_conf
 
@@ -24,6 +25,15 @@ class BaseCreateView(generic.CreateView):
 
         return context
 
+    def post(self, request, *args, **kwargs):
+        response = super(BaseCreateView, self).post(request, *args, **kwargs)
+        messages.add_message(
+            request,
+            messages.INFO,
+            base_conf.OBJECT_CREATED_SUCCESSFULLY
+        )
+        return response
+
 
 class BaseUpdateView(generic.UpdateView):
     """
@@ -41,6 +51,15 @@ class BaseUpdateView(generic.UpdateView):
             context['model_name_plural'] = self.model._meta.verbose_name_plural.title()
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        response = super(BaseUpdateView, self).post(request, *args, **kwargs)
+        messages.add_message(
+            request,
+            messages.INFO,
+            base_conf.OBJECT_UPDATED_SUCCESSFULLY
+        )
+        return response
 
 
 class BaseListView(generic.ListView):
@@ -156,3 +175,12 @@ class BaseDeleteView(generic.DeleteView):
             context['model_name_plural'] = self.model._meta.verbose_name_plural.title()
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        response = super(BaseDeleteView, self).post(request, *args, **kwargs)
+        messages.add_message(
+            request,
+            messages.INFO,
+            base_conf.OBJECT_DELETED_SUCCESSFULLY
+        )
+        return response
