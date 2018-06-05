@@ -5,6 +5,13 @@
     <h1>{% trans 'Create' %} {{ model_name }}</h1>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
+        {% if form.non_field_errors %}
+            <div class="non-field-errors">
+                {% for err in form.non_field_errors %}
+                    <p class="form-error">{{ err }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
         {% for input in form %}
             <div class="row">
             {% if input.errors %}
