@@ -144,10 +144,6 @@ class BaseDetailView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(BaseDetailView, self).get_context_data(**kwargs)
 
-        context[self.context_object_name].get_fields = [
-            (field.name, field.value_to_string(self.get_object())) for field in self.model._meta.fields
-        ]
-
         if self.model:
             context['model_name'] = self.model._meta.verbose_name.title()
             context['model_name_plural'] = self.model._meta.verbose_name_plural.title()

@@ -11,15 +11,23 @@ class BaseModel(models.Model):
     Default base models
     """
 
+    visible_fields = None
+
     class Meta:
         abstract = True
+
+    def display_fields(self):
+        if self.visible_fields is not None:
+            return (x for x in self._meta.fields if x.name in self.visible_fields)
+        else:
+            return self._meta.fields
 
     def get_fields(self):
         """
         Iterates over the model and return all fields and values
         :return: Array of tuples. Each tuple is (parameter, value of parameter)
         """
-        return [(field.name, field.value_to_string(self)) for field in self._meta.fields]
+        return [(field.name, field.value_to_string(self)) for field in self.display_fields()]
 
 
 class SimpleBaseModel(BaseModel):
