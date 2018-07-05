@@ -93,6 +93,8 @@ class BasePaginationListView(generic.ListView):
         context = super(BasePaginationListView, self).get_context_data(**kwargs)
 
         queryset = self.get_queryset()
+        if not queryset.ordered:
+            queryset = queryset.order_by("id")
 
         recordings_by_page = base_conf.ITEMS_BY_PAGE
         pager = paginator.Paginator(queryset, recordings_by_page)
@@ -101,7 +103,7 @@ class BasePaginationListView(generic.ListView):
             recordings = pager.page(page)
 
             start_index = max(1, recordings.number-3)
-            end_index = min(recordings.number+3, (len(queryset)/recordings_by_page)+1)
+            end_index = min(recordings.number+3, (len(queryset)//recordings_by_page)+1)
             context['range'] = range(start_index, end_index+1)
             context[self.context_object_name] = recordings
         except paginator.PageNotAnInteger:
