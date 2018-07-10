@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-22 23:03-0500\n"
+"POT-Creation-Date: 2018-07-10 10:21-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,53 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: conf.py:21
+msgid "Object created successfully"
+msgstr "Objeto creado exitosamente"
+
+#: conf.py:22
+msgid "Object updated successfully"
+msgstr "Objeto actualizado exitosamente"
+
+#: conf.py:23
+msgid "Object deleted successfully"
+msgstr "Objeto eliminado exitosamente"
+
+#: models.py:39 models.py:80 models.py:97
+#: templates/base/bootstrap/detail.html:16
+msgid "Name"
+msgstr "Nombre"
+
+#: models.py:40 models.py:81 models.py:98
+msgid "Description"
+msgstr "Descripción"
+
+#: models.py:53 models.py:82 models.py:100
+#, fuzzy
+#| msgid "Create"
+msgid "Created"
+msgstr "Crear"
+
+#: models.py:54 models.py:83 models.py:101
+msgid "Modified"
+msgstr "Modificado"
+
+#: models.py:67 models.py:84 models.py:102
+msgid "Active"
+msgstr "Activo"
+
+#: models.py:99
+msgid "Slug"
+msgstr "Slug"
+
 #: templates/base/bootstrap/create.html:5 templates/base/bootstrap/list.html:35
+#: templates/base/bootstrap/pagination_list.html:84
 #: templates/base/materialize/create.html:5
 msgid "Create"
 msgstr "Crear"
 
-#: templates/base/bootstrap/create.html:51
-#: templates/base/materialize/create.html:48
+#: templates/base/bootstrap/create.html:58
+#: templates/base/materialize/create.html:55
 msgid "create"
 msgstr "Crear"
 
@@ -51,16 +91,12 @@ msgstr "Al eliminar este objeto, también se eliminarán los siguientes objetos"
 msgid "Of class"
 msgstr "De la clase"
 
-#: templates/base/bootstrap/detail.html:16
-msgid "Name"
-msgstr "Nombre"
-
 #: templates/base/bootstrap/detail.html:19
 msgid "Value"
 msgstr "Valor"
 
 #: templates/base/bootstrap/detail.html:42
-#: templates/base/bootstrap/update.html:48
+#: templates/base/bootstrap/update.html:55
 msgid "Back"
 msgstr "Atrás"
 
@@ -78,13 +114,13 @@ msgid "Grid of"
 msgstr "Cuadrícula de"
 
 #: templates/base/bootstrap/list.html:7
-#: templates/base/bootstrap/pagination_list.html:5
+#: templates/base/bootstrap/pagination_list.html:7
 #: templates/base/materialize/list.html:5
 #: templates/base/materialize/pagination_list.html:5
 msgid "List of"
 msgstr "Lista de"
 
-#: templates/base/bootstrap/update.html:52
-#: templates/base/materialize/update.html:30
+#: templates/base/bootstrap/update.html:59
+#: templates/base/materialize/update.html:37
 msgid "update"
 msgstr "Actualizar"

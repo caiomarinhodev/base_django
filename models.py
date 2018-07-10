@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 
 from django.db import models, IntegrityError
 from django.utils.text import slugify
+from django.utils.translation import ugettext_lazy as _
+
 from . import utils
 # Create your models here.
 
@@ -34,8 +36,8 @@ class SimpleBaseModel(BaseModel):
     """
     Simple model model, includes a name and description
     """
-    name = models.CharField(max_length=100, blank=True)
-    description = models.TextField(blank=True)
+    name = models.CharField(max_length=100, blank=True, verbose_name=_("Name"))
+    description = models.TextField(blank=True, verbose_name=_("Description"))
 
     class Meta:
         abstract = True
@@ -48,8 +50,8 @@ class ModifiableBaseModel(BaseModel):
     """
     Simple base model to timestamp fields, created and modified included
     """
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True, verbose_name=_("Created"))
+    modified = models.DateTimeField(auto_now=True, verbose_name=_("Modified"))
 
     class Meta:
         abstract = True
@@ -62,7 +64,7 @@ class RemovableBaseModel(ModifiableBaseModel):
     """
     Simple base model, to check active objects, include an active flag
     """
-    active = models.BooleanField(default=True)
+    active = models.BooleanField(default=True, verbose_name=_("Active"))
 
     class Meta:
         abstract = True
@@ -75,11 +77,11 @@ class FullBaseModel(BaseModel):
     """
     Complete model, includes a mixin for SimpleBaseModel, ModifiableBaseModel and RemovableBaseModel
     """
-    name = models.CharField(max_length=100, blank=True)
-    description = models.TextField(blank=True)
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
-    active = models.BooleanField(default=True)
+    name = models.CharField(max_length=100, blank=True, verbose_name=_("Name"))
+    description = models.TextField(blank=True, verbose_name=_("Description"))
+    created = models.DateTimeField(auto_now_add=True, verbose_name=_("Created"))
+    modified = models.DateTimeField(auto_now=True, verbose_name=_("Modified"))
+    active = models.BooleanField(default=True, verbose_name=_("Active"))
 
     class Meta:
         abstract = True
@@ -92,12 +94,12 @@ class FullSlugBaseModel(BaseModel):
     """
     Complete model, includes the same from FullBaseModel and a slug field, to reference in URL in Class Based Views
     """
-    name = models.CharField(max_length=100, blank=True)
-    description = models.TextField(blank=True)
-    slug = models.SlugField(blank=True, unique=True)
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
-    active = models.BooleanField(default=True)
+    name = models.CharField(max_length=100, blank=True, verbose_name=_("Name"))
+    description = models.TextField(blank=True, verbose_name=_("Description"))
+    slug = models.SlugField(blank=True, unique=True, verbose_name=_("Slug"))
+    created = models.DateTimeField(auto_now_add=True, verbose_name=_("Created"))
+    modified = models.DateTimeField(auto_now=True, verbose_name=_("Modified"))
+    active = models.BooleanField(default=True, verbose_name=_("Active"))
     SLUG_RANDOM_CHARS = 20
     MAX_RANDOM_TRIES = 5
 
