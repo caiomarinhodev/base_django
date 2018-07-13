@@ -21,3 +21,10 @@ style = "bootstrap"
 OBJECT_CREATED_SUCCESSFULLY = _("Object created successfully")
 OBJECT_UPDATED_SUCCESSFULLY = _("Object updated successfully")
 OBJECT_DELETED_SUCCESSFULLY = _("Object deleted successfully")
+
+BASE_MODELS_TRANSLATION_NAME = _("Name")
+BASE_MODELS_TRANSLATION_DESCRIPTION = _("Description")
+BASE_MODELS_TRANSLATION_SLUG = _("Slug")
+BASE_MODELS_TRANSLATION_CREATED = _("Created")
+BASE_MODELS_TRANSLATION_MODIFIED = _("Modified")
+BASE_MODELS_TRANSLATION_ACTIVE = _("Active")

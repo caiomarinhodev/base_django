@@ -2,9 +2,11 @@ from __future__ import unicode_literals
 
 from django.db import models, IntegrityError
 from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy as _
 
-from . import utils
+from . import (
+    utils,
+    conf
+)
 # Create your models here.
 
 
@@ -36,8 +38,8 @@ class SimpleBaseModel(BaseModel):
     """
     Simple model model, includes a name and description
     """
-    name = models.CharField(max_length=100, blank=True, verbose_name=_("Name"))
-    description = models.TextField(blank=True, verbose_name=_("Description"))
+    name = models.CharField(max_length=100, blank=True, verbose_name=conf.BASE_MODELS_TRANSLATION_NAME)
+    description = models.TextField(blank=True, verbose_name=conf.BASE_MODELS_TRANSLATION_DESCRIPTION)
 
     class Meta:
         abstract = True
@@ -50,8 +52,8 @@ class ModifiableBaseModel(BaseModel):
     """
     Simple base model to timestamp fields, created and modified included
     """
-    created = models.DateTimeField(auto_now_add=True, verbose_name=_("Created"))
-    modified = models.DateTimeField(auto_now=True, verbose_name=_("Modified"))
+    created = models.DateTimeField(auto_now_add=True, verbose_name=conf.BASE_MODELS_TRANSLATION_CREATED)
+    modified = models.DateTimeField(auto_now=True, verbose_name=conf.BASE_MODELS_TRANSLATION_MODIFIED)
 
     class Meta:
         abstract = True
@@ -64,7 +66,7 @@ class RemovableBaseModel(ModifiableBaseModel):
     """
     Simple base model, to check active objects, include an active flag
     """
-    active = models.BooleanField(default=True, verbose_name=_("Active"))
+    active = models.BooleanField(default=True, verbose_name=conf.BASE_MODELS_TRANSLATION_ACTIVE)
 
     class Meta:
         abstract = True
@@ -77,11 +79,11 @@ class FullBaseModel(BaseModel):
     """
     Complete model, includes a mixin for SimpleBaseModel, ModifiableBaseModel and RemovableBaseModel
     """
-    name = models.CharField(max_length=100, blank=True, verbose_name=_("Name"))
-    description = models.TextField(blank=True, verbose_name=_("Description"))
-    created = models.DateTimeField(auto_now_add=True, verbose_name=_("Created"))
-    modified = models.DateTimeField(auto_now=True, verbose_name=_("Modified"))
-    active = models.BooleanField(default=True, verbose_name=_("Active"))
+    name = models.CharField(max_length=100, blank=True, verbose_name=conf.BASE_MODELS_TRANSLATION_NAME)
+    description = models.TextField(blank=True, verbose_name=conf.BASE_MODELS_TRANSLATION_DESCRIPTION)
+    created = models.DateTimeField(auto_now_add=True, verbose_name=conf.BASE_MODELS_TRANSLATION_CREATED)
+    modified = models.DateTimeField(auto_now=True, verbose_name=conf.BASE_MODELS_TRANSLATION_MODIFIED)
+    active = models.BooleanField(default=True, verbose_name=conf.BASE_MODELS_TRANSLATION_ACTIVE)
 
     class Meta:
         abstract = True
@@ -94,12 +96,12 @@ class FullSlugBaseModel(BaseModel):
     """
     Complete model, includes the same from FullBaseModel and a slug field, to reference in URL in Class Based Views
     """
-    name = models.CharField(max_length=100, blank=True, verbose_name=_("Name"))
-    description = models.TextField(blank=True, verbose_name=_("Description"))
-    slug = models.SlugField(blank=True, unique=True, verbose_name=_("Slug"))
-    created = models.DateTimeField(auto_now_add=True, verbose_name=_("Created"))
-    modified = models.DateTimeField(auto_now=True, verbose_name=_("Modified"))
-    active = models.BooleanField(default=True, verbose_name=_("Active"))
+    name = models.CharField(max_length=100, blank=True, verbose_name=conf.BASE_MODELS_TRANSLATION_NAME)
+    description = models.TextField(blank=True, verbose_name=conf.BASE_MODELS_TRANSLATION_DESCRIPTION)
+    slug = models.SlugField(blank=True, unique=True, verbose_name=conf.BASE_MODELS_TRANSLATION_SLUG)
+    created = models.DateTimeField(auto_now_add=True, verbose_name=conf.BASE_MODELS_TRANSLATION_CREATED)
+    modified = models.DateTimeField(auto_now=True, verbose_name=conf.BASE_MODELS_TRANSLATION_MODIFIED)
+    active = models.BooleanField(default=True, verbose_name=conf.BASE_MODELS_TRANSLATION_ACTIVE)
     SLUG_RANDOM_CHARS = 20
     MAX_RANDOM_TRIES = 5
 

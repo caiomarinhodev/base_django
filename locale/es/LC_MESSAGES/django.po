@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-10 10:21-0500\n"
+"POT-Creation-Date: 2018-07-13 15:02-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,32 +30,30 @@ msgstr "Objeto actualizado exitosamente"
 msgid "Object deleted successfully"
 msgstr "Objeto eliminado exitosamente"
 
-#: models.py:39 models.py:80 models.py:97
-#: templates/base/bootstrap/detail.html:16
+#: conf.py:25 templates/base/bootstrap/detail.html:16
 msgid "Name"
 msgstr "Nombre"
 
-#: models.py:40 models.py:81 models.py:98
+#: conf.py:26
 msgid "Description"
 msgstr "Descripción"
 
-#: models.py:53 models.py:82 models.py:100
-#, fuzzy
+#: conf.py:27
+msgid "Slug"
+msgstr "Slug"
+
+#: conf.py:28
 #| msgid "Create"
 msgid "Created"
-msgstr "Crear"
+msgstr "Creado"
 
-#: models.py:54 models.py:83 models.py:101
+#: conf.py:29
 msgid "Modified"
 msgstr "Modificado"
 
-#: models.py:67 models.py:84 models.py:102
+#: conf.py:30
 msgid "Active"
 msgstr "Activo"
-
-#: models.py:99
-msgid "Slug"
-msgstr "Slug"
 
 #: templates/base/bootstrap/create.html:5 templates/base/bootstrap/list.html:35
 #: templates/base/bootstrap/pagination_list.html:84
