@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-13 15:02-0500\n"
+"POT-Creation-Date: 2018-07-17 12:30-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,7 +43,6 @@ msgid "Slug"
 msgstr "Slug"
 
 #: conf.py:28
-#| msgid "Create"
 msgid "Created"
 msgstr "Creado"
 
@@ -54,6 +53,22 @@ msgstr "Modificado"
 #: conf.py:30
 msgid "Active"
 msgstr "Activo"
+
+#: templates/403.html:5
+msgid "Forbidden"
+msgstr "Prohibido"
+
+#: templates/403.html:8
+msgid "You haven't access to this site"
+msgstr "No tienes acceso a este sitio"
+
+#: templates/404.html:5
+msgid "Not Found"
+msgstr "No encontrado"
+
+#: templates/404.html:8
+msgid "The URL that you're requesting is not found on this server"
+msgstr "La URL que ha solicitada no se encontró en este servidor"
 
 #: templates/base/bootstrap/create.html:5 templates/base/bootstrap/list.html:35
 #: templates/base/bootstrap/pagination_list.html:84
