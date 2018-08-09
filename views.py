@@ -3,13 +3,29 @@ from django.views import generic
 from django.core import paginator
 from django.contrib.admin.utils import NestedObjects
 from django.contrib import messages
+from django.core.exceptions import FieldDoesNotExist
 
 from . import conf as base_conf
 
-# Create your views here.
+
+class BaseView(object):
+
+    def __init__(self, model=None):
+        if model:
+            self.model = model
+
+    def kwargs_for_reverse_url(self):
+        kwargs_dict = dict()
+        if self.model:
+            try:
+                self.model._meta.get_field('slug')
+                kwargs_dict['slug'] = self.get_object().slug
+            except FieldDoesNotExist:
+                kwargs_dict['pk'] = self.get_object().id
+        return kwargs_dict
 
 
-class BaseCreateView(generic.CreateView):
+class BaseCreateView(BaseView, generic.CreateView):
     """
     View based on CreateView from django.views.generic.
     Use a custom template for a form display
@@ -35,7 +51,7 @@ class BaseCreateView(generic.CreateView):
         return response
 
 
-class BaseUpdateView(generic.UpdateView):
+class BaseUpdateView(BaseView, generic.UpdateView):
     """
     View based on Update from django.views.generic.
     Use a custom template for a form display
@@ -62,7 +78,7 @@ class BaseUpdateView(generic.UpdateView):
         return response
 
 
-class BaseListView(generic.ListView):
+class BaseListView(BaseView, generic.ListView):
     """
     View based on ListView from django.views.generic.
     Use a custom template for iterate a list
@@ -80,7 +96,7 @@ class BaseListView(generic.ListView):
         return context
 
 
-class BasePaginationListView(generic.ListView):
+class BasePaginationListView(BaseView, generic.ListView):
     """
     View based on ListView from django.views.generic.
     Use a custom template for iterate a list.
@@ -135,7 +151,7 @@ class BasePaginationGridView(BasePaginationListView):
     template_name = "base/%s/pagination_grid.html" % base_conf.style
 
 
-class BaseDetailView(generic.DetailView):
+class BaseDetailView(BaseView, generic.DetailView):
     """
     View based on DetailView from django.views.generic.
     Shows all attributes and values of an object
@@ -153,7 +169,7 @@ class BaseDetailView(generic.DetailView):
         return context
 
 
-class BaseDeleteView(generic.DeleteView):
+class BaseDeleteView(BaseView, generic.DeleteView):
     """
     View based on Delete view from django.views.generic
     Show a list with all elements to be delete and delete it on post

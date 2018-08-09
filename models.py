@@ -119,7 +119,7 @@ class FullSlugBaseModel(BaseModel):
         :return: Object
         """
         if not self.slug:
-            self.slug = slugify(self.name)
+            self.slug = slugify(str(self))
         successful_save = False
         saved_object = None
         index_iterations = 0
