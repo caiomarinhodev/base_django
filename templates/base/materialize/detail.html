@@ -14,4 +14,26 @@
         </div>
       </div>
     {% endfor %}
+
+    <div class="actions">
+        <a href="javascript:window.history.back();">
+            <button class="btn btn-default">
+                {% trans 'Back' %}
+            </button>
+        </a>
+        {% if update_object_reversed_url %}
+            <a href="{{ update_object_reversed_url }}">
+                <button class="btn btn-primary">
+                    {% trans 'Update' %}
+                </button>
+            </a>
+        {% endif %}
+        {% if delete_object_reversed_url %}
+            <a href="{{ delete_object_reversed_url }}">
+                <button class="btn btn-danger">
+                    {% trans 'Delete' %}
+                </button>
+            </a>
+        {% endif %}
+    </div>
 {% endblock %}

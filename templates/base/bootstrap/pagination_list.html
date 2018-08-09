@@ -77,8 +77,8 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="actions">
-                {% if user.is_staff %}
-                    <a href="create">
+                {% if create_object_reversed_url %}
+                    <a href="{{ create_object_reversed_url }}">
 
                         <button class="btn btn-success">
                             {% trans 'Create' %}

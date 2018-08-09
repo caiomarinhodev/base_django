@@ -42,16 +42,20 @@
                         {% trans 'Back' %}
                     </button>
                 </a>
-                <a href="delete">
-                    <button class="btn btn-danger">
-                            {% trans 'Delete' %}
-                    </button>
-                </a>
-                <a href="update">
-                    <button class="btn btn-primary">
+                {% if update_object_reversed_url %}
+                    <a href="{{ update_object_reversed_url }}">
+                        <button class="btn btn-primary">
                             {% trans 'Update' %}
-                    </button>
-                </a>
+                        </button>
+                    </a>
+                {% endif %}
+                {% if delete_object_reversed_url %}
+                    <a href="{{ delete_object_reversed_url }}">
+                        <button class="btn btn-danger">
+                            {% trans 'Delete' %}
+                        </button>
+                    </a>
+                {% endif %}
             </div>
 
         </div>

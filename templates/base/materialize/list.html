@@ -21,4 +21,15 @@
             {% endif %}
         </div>
     {% endfor %}
+
+    <div class="actions">
+        {% if create_object_reversed_url %}
+            <a href="{{ create_object_reversed_url }}">
+
+                <button class="btn btn-success">
+                    {% trans 'Create' %}
+                </button>
+            </a>
+        {% endif %}
+    </div>
 {% endblock %}
