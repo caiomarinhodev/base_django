@@ -17,11 +17,12 @@ class BaseView(object):
     def kwargs_for_reverse_url(self):
         kwargs_dict = dict()
         if self.model:
+            self.object = self.object if self.object is not None else self.get_object()
             try:
                 self.model._meta.get_field('slug')
-                kwargs_dict['slug'] = self.get_object().slug
+                kwargs_dict['slug'] = self.object.slug
             except FieldDoesNotExist:
-                kwargs_dict['pk'] = self.get_object().id
+                kwargs_dict['pk'] = self.object.id
         return kwargs_dict
 
 
