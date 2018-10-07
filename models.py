@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 
-from django.db import models, IntegrityError
+from django.db import models, IntegrityError, DataError
 from django.utils.text import slugify
 
 from . import (
@@ -128,9 +128,9 @@ class FullSlugBaseModel(BaseModel):
             try:
                 saved_object = super(FullSlugBaseModel, self).save(force_insert, force_update, using, update_fields)
                 successful_save = True
-            except IntegrityError as e:
-                if len(self.slug)+self.SLUG_RANDOM_CHARS > 150:
-                    self.slug = self.slug[:-self.SLUG_RANDOM_CHARS] + "-" + utils.generate_random_string(self.SLUG_RANDOM_CHARS)
+            except (IntegrityError, DataError)as e:
+                if len(self.slug)+self.SLUG_RANDOM_CHARS > 50:
+                    self.slug = self.slug[:49][:-self.SLUG_RANDOM_CHARS] + "-" + utils.generate_random_string(self.SLUG_RANDOM_CHARS)
                 else:
                     self.slug = self.slug + "-" + utils.generate_random_string(self.SLUG_RANDOM_CHARS)
 
