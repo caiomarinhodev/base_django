@@ -19,9 +19,9 @@
                     <tr>
                         <td>
                             {% if element.slug %}
-                                <a href="{% url element.url_name element.slug %}">{{ element }}</a>
+                                <a href="{% url detail_url_name element.slug %}">{{ element }}</a>
                             {% else %}
-                                <a href="{% url element.url_name element.id %}">{{ element }}</a>
+                                <a href="{% url detail_url_name element.id %}">{{ element }}</a>
                             {% endif %}
                         </td>
                     </tr>

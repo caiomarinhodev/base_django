@@ -9,9 +9,9 @@
             <div class="card">
                 {% if element.image %}
                     <div class="card-image">{% if element.slug %}
-                        <a href="{% url element.url_name element.slug %}">
+                        <a href="{% url detail_url_name element.slug %}">
                     {% else %}
-                        <a href="{% url element.url_name element.id %}">
+                        <a href="{% url detail_url_name element.id %}">
                     {% endif %}
                         <img src="/media/{{ element.image }}"/>
                         </a>
@@ -27,9 +27,9 @@
                 {% else %}
                     <div class="card-title black-text">
                         {% if element.slug %}
-                            <a href="{% url element.url_name element.slug %}">{{ element }}</a>
+                            <a href="{% url detail_url_name element.slug %}">{{ element }}</a>
                         {% else %}
-                            <a href="{% url element.url_name element.id %}">{{ element }}</a>
+                            <a href="{% url detail_url_name element.id %}">{{ element }}</a>
                         {% endif %}
                     </div>
                     {% if element.description%}
