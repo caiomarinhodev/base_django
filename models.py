@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
-from django.db import models, IntegrityError, DataError
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
 
 from . import (
@@ -31,7 +32,7 @@ class BaseModel(models.Model):
         Iterates over the model and return all fields and values
         :return: Array of tuples. Each tuple is (parameter, value of parameter)
         """
-        return [(field.name, field.value_to_string(self)) for field in self.display_fields()]
+        return [(_(field.verbose_name), field.value_to_string(self)) for field in self.display_fields()]
 
 
 class SimpleBaseModel(BaseModel):
@@ -72,7 +73,7 @@ class RemovableBaseModel(ModifiableBaseModel):
         abstract = True
 
     def __str__(self):
-        return self.name
+        return self.id
 
 
 class FullBaseModel(BaseModel):
@@ -139,8 +140,6 @@ class FullSlugBaseModel(BaseModel):
         if not self.slug:
             self.slug = self.generate_valid_random_slug()
         super(FullSlugBaseModel, self).save(force_insert, force_update, using, update_fields)
-
-
 
     def __str__(self):
         return self.name
