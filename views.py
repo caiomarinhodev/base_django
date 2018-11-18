@@ -79,6 +79,22 @@ class BaseUpdateView(BaseView, generic.UpdateView):
         return response
 
 
+class SimpleFilterMixin(object):
+
+    def get_queryset(self):
+        self.queryset = super(SimpleFilterMixin, self).get_queryset()
+        new_args = dict()
+        for key, value in self.request.GET.items():
+            print(key, value)
+            new_args.update({
+                "{}__icontains".format(key): value
+            })
+        self.queryset = self.queryset.filter(**new_args)
+
+        return self.queryset
+
+
+
 class BaseListView(BaseView, generic.ListView):
     """
     View based on ListView from django.views.generic.
