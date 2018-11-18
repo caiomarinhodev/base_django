@@ -108,6 +108,24 @@ class FullSlugBaseModel(BaseModel):
     class Meta:
         abstract = True
 
+    def generate_valid_random_slug(self):
+        slug = slugify(str(self))
+        valid_slug = False
+
+        index_iterations = 0
+        while not valid_slug and index_iterations < self.MAX_RANDOM_TRIES:
+            index_iterations += 1
+            if len(slug) + self.SLUG_RANDOM_CHARS > 50:
+                slug = slug[:49][:-self.SLUG_RANDOM_CHARS] + "-" + utils.generate_random_string(
+                    self.SLUG_RANDOM_CHARS)
+            else:
+                slug = slug + "-" + utils.generate_random_string(self.SLUG_RANDOM_CHARS)
+
+            if index_iterations == self.MAX_RANDOM_TRIES:
+                return slug
+            valid_slug = type(self).objects.filter(slug=slug).count() == 0
+        return slug
+
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         """
@@ -119,24 +137,10 @@ class FullSlugBaseModel(BaseModel):
         :return: Object
         """
         if not self.slug:
-            self.slug = slugify(str(self))
-        successful_save = False
-        saved_object = None
-        index_iterations = 0
-        while not successful_save and index_iterations < self.MAX_RANDOM_TRIES:
-            index_iterations += 1
-            try:
-                saved_object = super(FullSlugBaseModel, self).save(force_insert, force_update, using, update_fields)
-                successful_save = True
-            except (IntegrityError, DataError)as e:
-                if len(self.slug)+self.SLUG_RANDOM_CHARS > 50:
-                    self.slug = self.slug[:49][:-self.SLUG_RANDOM_CHARS] + "-" + utils.generate_random_string(self.SLUG_RANDOM_CHARS)
-                else:
-                    self.slug = self.slug + "-" + utils.generate_random_string(self.SLUG_RANDOM_CHARS)
+            self.slug = self.generate_valid_random_slug()
+        super(FullSlugBaseModel, self).save(force_insert, force_update, using, update_fields)
 
-                if index_iterations == self.MAX_RANDOM_TRIES:
-                    raise e
-        return saved_object
+
 
     def __str__(self):
         return self.name
