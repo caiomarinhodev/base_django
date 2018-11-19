@@ -28,3 +28,7 @@ BASE_MODELS_TRANSLATION_SLUG = _("Slug")
 BASE_MODELS_TRANSLATION_CREATED = _("Created")
 BASE_MODELS_TRANSLATION_MODIFIED = _("Modified")
 BASE_MODELS_TRANSLATION_ACTIVE = _("Active")
+
+CONFIGURING_APPLICATION = _("Configuring application {}")
+CREATING_PERMISSION_WITH_NAME = _("Creating Permission with name {}")
+CREATING_GROUP_WITH_NAME = _("Creating Group with name {}")

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-17 12:30-0500\n"
+"POT-Creation-Date: 2018-11-19 00:25-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,6 +54,18 @@ msgstr "Modificado"
 msgid "Active"
 msgstr "Activo"
 
+#: conf.py:32
+msgid "Configuring application {}"
+msgstr "Configurando la aplicación {}"
+
+#: conf.py:33
+msgid "Creating Permission with name {}"
+msgstr "Creando Permiso con nombre {}"
+
+#: conf.py:34
+msgid "Creating Group with name {}"
+msgstr "Creando Grupo con nombre {}"
+
 #: templates/403.html:5
 msgid "Forbidden"
 msgstr "Prohibido"
@@ -70,9 +82,13 @@ msgstr "No encontrado"
 msgid "The URL that you're requesting is not found on this server"
 msgstr "La URL que ha solicitada no se encontró en este servidor"
 
-#: templates/base/bootstrap/create.html:5 templates/base/bootstrap/list.html:35
+#: templates/base/bootstrap/create.html:5 templates/base/bootstrap/list.html:36
+#: templates/base/bootstrap/pagination_grid.html:97
 #: templates/base/bootstrap/pagination_list.html:84
 #: templates/base/materialize/create.html:5
+#: templates/base/materialize/list.html:30
+#: templates/base/materialize/pagination_grid.html:97
+#: templates/base/materialize/pagination_list.html:73
 msgid "Create"
 msgstr "Crear"
 
@@ -83,9 +99,10 @@ msgstr "Crear"
 
 #: templates/base/bootstrap/delete.html:8
 #: templates/base/bootstrap/delete.html:20
-#: templates/base/bootstrap/detail.html:47
+#: templates/base/bootstrap/detail.html:55
 #: templates/base/materialize/delete.html:5
 #: templates/base/materialize/delete.html:16
+#: templates/base/materialize/detail.html:34
 msgid "Delete"
 msgstr "Eliminar"
 
@@ -110,11 +127,13 @@ msgstr "Valor"
 
 #: templates/base/bootstrap/detail.html:42
 #: templates/base/bootstrap/update.html:55
+#: templates/base/materialize/detail.html:21
 msgid "Back"
 msgstr "Atrás"
 
-#: templates/base/bootstrap/detail.html:52
+#: templates/base/bootstrap/detail.html:48
 #: templates/base/bootstrap/update.html:5
+#: templates/base/materialize/detail.html:27
 #: templates/base/materialize/update.html:5
 msgid "Update"
 msgstr "Actualizar"
