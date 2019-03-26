@@ -3,6 +3,7 @@ from django.contrib.auth import models as auth_models
 
 from . import conf
 
+
 def get_or_create_permission_from_dict(action_meta_data):
     contenttype = contenttypes_models.ContentType.objects.get(
         app_label=action_meta_data['app_label'],
@@ -25,6 +26,7 @@ def get_or_create_permission_from_dict(action_meta_data):
 
     return permission
 
+
 def transform_descriptive_dict_in_permission_dict(permission_dict):
     assert isinstance(permission_dict, dict)
     return_dict = dict()
@@ -38,10 +40,18 @@ def transform_descriptive_dict_in_permission_dict(permission_dict):
     return return_dict
 
 
-def configure_groups_and_permissions(permissions_dict, groups_dict):
+def get_all_permissions_in_dict_form():
+    return {x.codename: x for x in auth_models.Permission.objects.all()}
+
+
+def configure_groups_and_permissions(groups_dict, permissions_dict):
     assert isinstance(permissions_dict, dict)
     transformed_permission_dict = transform_descriptive_dict_in_permission_dict(permissions_dict)
-
+    # Now we merge all permissions with new permission_dict
+    all_permissions_in_dict_form = {
+        **get_all_permissions_in_dict_form(),
+        **transformed_permission_dict
+    }
     assert isinstance(groups_dict, dict)
     for group_id, group_description in groups_dict.items():
         assert group_description.get("name", "")
@@ -56,4 +66,4 @@ def configure_groups_and_permissions(permissions_dict, groups_dict):
         else:
             group = groups[0]
         for permission in group_description.get("permissions", ""):
-            group.permissions.add(transformed_permission_dict[permission])
+            group.permissions.add(all_permissions_in_dict_form[permission])

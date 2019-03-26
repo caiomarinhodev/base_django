@@ -59,3 +59,29 @@ Base uses [messages](https://docs.djangoproject.com/en/1.11/ref/contrib/messages
 
 We also provide an [authentication package](https://git.contraslash.com/ma0/authentication-django), (also mirrored in
 [github](https://github.com/ma0c/authentication-django)) to speed up authentication
+
+To use the permissions and groups configuration, you need to specify
+two dicts one with permissions name and other with groups schema
+
+```python
+PERMISSIONS = {
+    'manage_orders': {
+        'app_label': 'application_name',
+        'model': 'model_name',
+        'codename': 'code_name_for_permissions',
+    }
+}
+
+GROUPS = {
+    'group_name': {
+        "name": _("Verbose name"),
+        'permissions': [
+            "permission_attached_to",
+            "this_group"
+
+        ]
+    },
+}
+```
+
+Then use `base.setup.
