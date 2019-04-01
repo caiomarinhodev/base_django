@@ -94,7 +94,6 @@ class SimpleFilterMixin(object):
         return self.queryset
 
 
-
 class BaseListView(BaseView, generic.ListView):
     """
     View based on ListView from django.views.generic.
@@ -106,9 +105,8 @@ class BaseListView(BaseView, generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(BaseListView, self).get_context_data(**kwargs)
 
-        if len(self.get_queryset()) > 0:
-            context['model_name'] = self.get_queryset()[0]._meta.verbose_name.title()
-            context['model_name_plural'] = self.get_queryset()[0]._meta.verbose_name_plural.title()
+        context['model_name'] = self.get_queryset().model._meta.verbose_name.title()
+        context['model_name_plural'] = self.get_queryset().model._meta.verbose_name_plural.title()
 
         return context
 

@@ -8,18 +8,11 @@ from . import (
     utils,
     conf
 )
-# Create your models here.
 
 
-class BaseModel(models.Model):
-    """
-    Default base models
-    """
+class DisplayFieldsMixin(object):
 
     visible_fields = None
-
-    class Meta:
-        abstract = True
 
     def display_fields(self):
         if self.visible_fields is not None:
@@ -33,6 +26,15 @@ class BaseModel(models.Model):
         :return: Array of tuples. Each tuple is (parameter, value of parameter)
         """
         return [(_(field.verbose_name), field.value_to_string(self)) for field in self.display_fields()]
+
+
+class BaseModel(models.Model, DisplayFieldsMixin):
+    """
+    Default base models
+    """
+
+    class Meta:
+        abstract = True
 
 
 class SimpleBaseModel(BaseModel):

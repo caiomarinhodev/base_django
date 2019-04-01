@@ -1,13 +1,24 @@
 from django.db.models import (
+    CharField,
     TextField,
     IntegerField,
-    EmailField
+    EmailField,
+    ForeignKey,
+    FileField,
+    DateTimeField,
+    DateField
 )
 from django.forms.widgets import (
     Textarea,
     NumberInput,
     EmailInput,
-    Input
+    Input,
+    Select,
+    TextInput,
+    FileInput,
+    DateTimeInput,
+    DateInput
+
 )
 
 import random
@@ -51,12 +62,28 @@ def utf_8_encoder(unicode_csv_data):
 
 
 def field_to_widget(field):
+    if type(field) is CharField:
+        if field.choices:
+            return Select(attrs={"class": "form-control"})
+        return TextInput(attrs={"class": "form-control", "rows": 1})
     if type(field) is TextField:
         return Textarea(attrs={"class": "form-control", "rows": 1})
     if type(field) is IntegerField:
         return NumberInput(attrs={"class": "form-control"})
     if type(field) is EmailField:
         return EmailInput(attrs={"class": "form-control"})
+    if type(field) is ForeignKey:
+        return Select(attrs={"class": "form-control"})
+    if type(field) is FileField:
+        return FileInput(attrs={"class": "form-control"})
+    if type(field) is DateField:
+        return DateInput(attrs={
+            "class": "form-control date",
+            "type": "date"
+        })
+    if type(field) is DateTimeField:
+        return DateTimeInput(attrs={"class": "form-control"})
+
     return Input(attrs={"class": "form-control"})
 
 
