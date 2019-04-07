@@ -2,6 +2,7 @@ from django.db.models import (
     CharField,
     TextField,
     IntegerField,
+    FloatField,
     EmailField,
     ForeignKey,
     FileField,
@@ -68,7 +69,7 @@ def field_to_widget(field):
         return TextInput(attrs={"class": "form-control", "rows": 1})
     if type(field) is TextField:
         return Textarea(attrs={"class": "form-control", "rows": 1})
-    if type(field) is IntegerField:
+    if type(field) is IntegerField or type(field) is FloatField:
         return NumberInput(attrs={"class": "form-control"})
     if type(field) is EmailField:
         return EmailInput(attrs={"class": "form-control"})

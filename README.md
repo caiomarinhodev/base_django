@@ -60,6 +60,8 @@ Base uses [messages](https://docs.djangoproject.com/en/1.11/ref/contrib/messages
 We also provide an [authentication package](https://git.contraslash.com/ma0/authentication-django), (also mirrored in
 [github](https://github.com/ma0c/authentication-django)) to speed up authentication
 
+## Permissions
+
 To use the permissions and groups configuration, you need to specify
 two dicts one with permissions name and other with groups schema
 
@@ -84,4 +86,5 @@ GROUPS = {
 }
 ```
 
-Then use `base.setup.
+Then use `base.setup`.
+
