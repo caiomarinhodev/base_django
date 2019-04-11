@@ -19,9 +19,22 @@
                         <tr>
                             <td>
                                     {% if element.slug %}
-                                        <a href="{% url detail_url_name element.slug %}">{{ element }}</a>
+                                        <a href="{% url detail_url_name element.slug %}">
+                                            {% if element|stringformat:"s" %}
+                                                {{ element }}
+                                            {% else %}
+                                                {{ element.slug }}
+                                            {% endif %}
+                                        </a>
                                     {% else %}
-                                        <a href="{% url detail_url_name element.id %}">{{ element }}</a>
+                                        <a href="{% url detail_url_name element.id %}">
+                                            {% if element|stringformat:"s" %}
+                                                {{ element }}
+                                            {% else %}
+                                                {{ element.id }}
+                                            {% endif %}
+                                        </a>
+                                        </a>
                                     {% endif %}
                             </td>
                         </tr>

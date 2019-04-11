@@ -7,7 +7,8 @@ from django.db.models import (
     ForeignKey,
     FileField,
     DateTimeField,
-    DateField
+    DateField,
+    AutoField
 )
 from django.forms.widgets import (
     Textarea,
@@ -18,7 +19,8 @@ from django.forms.widgets import (
     TextInput,
     FileInput,
     DateTimeInput,
-    DateInput
+    DateInput,
+    HiddenInput
 
 )
 
@@ -69,6 +71,8 @@ def field_to_widget(field):
         return TextInput(attrs={"class": "form-control", "rows": 1})
     if type(field) is TextField:
         return Textarea(attrs={"class": "form-control", "rows": 1})
+    if type(field) is AutoField:
+        return HiddenInput(attrs={"class": "form-control", "rows": 1})
     if type(field) is IntegerField or type(field) is FloatField:
         return NumberInput(attrs={"class": "form-control"})
     if type(field) is EmailField:
