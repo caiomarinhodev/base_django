@@ -8,7 +8,8 @@ from django.db.models import (
     FileField,
     DateTimeField,
     DateField,
-    AutoField
+    AutoField,
+    BooleanField
 )
 from django.forms.widgets import (
     Textarea,
@@ -20,8 +21,8 @@ from django.forms.widgets import (
     FileInput,
     DateTimeInput,
     DateInput,
-    HiddenInput
-
+    HiddenInput,
+    CheckboxInput
 )
 
 import random
@@ -79,6 +80,9 @@ def field_to_widget(field):
         return EmailInput(attrs={"class": "form-control"})
     if type(field) is ForeignKey:
         return Select(attrs={"class": "form-control"})
+    if type(field) is BooleanField:
+        return CheckboxInput(attrs={"class": "form-control"})
+
     if type(field) is FileField:
         return FileInput(attrs={"class": "form-control"})
     if type(field) is DateField:
