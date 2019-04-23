@@ -68,7 +68,6 @@ def utf_8_encoder(unicode_csv_data):
 
 
 def field_to_widget(field):
-    print(field, type(field))
     if type(field) is CharField:
         if field.choices:
             return Select(attrs={"class": "form-control"})
@@ -84,7 +83,6 @@ def field_to_widget(field):
     if type(field) is ForeignKey:
         return Select(attrs={"class": "form-control"})
     if type(field) is ManyToManyField:
-        print(field)
         return CheckboxSelectMultiple(attrs={"class": ""})
     if type(field) is BooleanField:
         return CheckboxInput(attrs={"class": "form-control"})
