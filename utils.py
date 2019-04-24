@@ -8,7 +8,9 @@ from django.db.models import (
     FileField,
     DateTimeField,
     DateField,
-    AutoField
+    AutoField,
+    BooleanField,
+    ManyToManyField
 )
 from django.forms.widgets import (
     Textarea,
@@ -20,8 +22,9 @@ from django.forms.widgets import (
     FileInput,
     DateTimeInput,
     DateInput,
-    HiddenInput
-
+    HiddenInput,
+    CheckboxInput,
+    CheckboxSelectMultiple,
 )
 
 import random
@@ -79,6 +82,10 @@ def field_to_widget(field):
         return EmailInput(attrs={"class": "form-control"})
     if type(field) is ForeignKey:
         return Select(attrs={"class": "form-control"})
+    if type(field) is ManyToManyField:
+        return CheckboxSelectMultiple(attrs={"class": ""})
+    if type(field) is BooleanField:
+        return CheckboxInput(attrs={"class": "form-control"})
     if type(field) is FileField:
         return FileInput(attrs={"class": "form-control"})
     if type(field) is DateField:
@@ -93,4 +100,4 @@ def field_to_widget(field):
 
 
 def generate_bootstrap_widgets_for_all_fields(model):
-    return {x.name: field_to_widget(x) for x in model._meta.fields}
+    return {x.name: field_to_widget(x) for x in model._meta.get_fields()}
