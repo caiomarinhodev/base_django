@@ -87,7 +87,7 @@ def field_to_widget(field):
             "type": "date"
         })
     if type(field) is DateTimeField:
-        return DateTimeInput(attrs={"class": "form-control"})
+        return DateTimeInput(attrs={"class": "form-control datetimepicker"})
 
     return Input(attrs={"class": "form-control"})
 
