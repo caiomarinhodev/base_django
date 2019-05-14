@@ -11,6 +11,7 @@ def site_name(request):
     protocol = 'https' if request.is_secure() else 'http'
     return {
         'site': site,
+        'site_name': site.name,
         'site_root': SimpleLazyObject(lambda: "{0}://{1}".format(protocol, site.domain)),
         'full_url': SimpleLazyObject(lambda: "{0}://{1}{2}".format(protocol, site.domain, request.path)),
         'path': SimpleLazyObject(lambda: "{0}".format(request.path)),
