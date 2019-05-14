@@ -48,6 +48,7 @@ BASE_TEMPLATES_FOLDER = "my_template_folder"
 
 This folder must be discoverable for your `TEMPLATE_ENGINE`
 
+To check full documentation see [Templating](docs/templating.md)
 
 Base uses [messages](https://docs.djangoproject.com/en/1.11/ref/contrib/messages/) Framework, with bootstrap you can use like:
 
@@ -99,4 +100,18 @@ GROUPS = {
 ```
 
 Then use `base.setup`.
+
+
+## Context processors
+
+To use any context processor, you need to add the function signature name to
+your `TEMPLATES[0]["OPTIONS"]["CONTEXT_PROCESSORS"]`
+
+- site_name:
+    site_name relies on `django.contrib.sites`, so add it to your `INSTALLED_APPS` on your `settings.py`
+    Also read the [official documentation](https://docs.djangoproject.com/en/2.2/ref/contrib/sites/)
+     
+     
+Check the full documentation for [context_processors](docs/context_processors.md)
+
 
