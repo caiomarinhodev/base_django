@@ -17,6 +17,8 @@ git submodule add https://github.com/contraslash/base-django base
 django-crud-generator.py --django_application_folder your/application/folder --model_name YourModelName 
 ```
 
+## Templating
+
 We assume you have a `base.html` file with this a main block content, example:
 
 ```html
@@ -36,6 +38,16 @@ We support these CSS Frameworks:
 
 - [Bootstrap](templates/base/bootstrap)
 - [Materialize](templates/base/bootstrap)
+
+
+But if you prefer use your own styles, specify the template folder to use in your `settings.py` file
+
+```python
+BASE_TEMPLATES_FOLDER = "my_template_folder"
+```
+
+This folder must be discoverable for your `TEMPLATE_ENGINE`
+
 
 Base uses [messages](https://docs.djangoproject.com/en/1.11/ref/contrib/messages/) Framework, with bootstrap you can use like:
 

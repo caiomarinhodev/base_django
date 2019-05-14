@@ -4,6 +4,17 @@
 Global variables for base module
 """
 from django.utils.translation import ugettext_lazy as _
+from django.conf import LazySettings
+
+settings = LazySettings()
+
+
+def get_from_settings_or_default(var_name, default):
+    try:
+        return settings.__getattr__(var_name)
+    except AttributeError:
+        return default
+
 
 # Items by page on paginator views
 ITEMS_BY_PAGE = 12
@@ -15,7 +26,8 @@ UPDATE_SUFFIX = "_update"
 DELETE_SUFFIX = "_delete"
 
 # style = "materialize"
-style = "bootstrap"
+style = get_from_settings_or_default('BASE_TEMPLATES_FOLDER', "base/bootstrap")
+
 
 # Messages
 OBJECT_CREATED_SUCCESSFULLY = _("Object created successfully")
