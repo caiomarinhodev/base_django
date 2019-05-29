@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
+from django.contrib.admin.utils import NestedObjects
 
 from . import (
     utils,
@@ -26,6 +27,11 @@ class DisplayFieldsMixin(object):
         :return: Array of tuples. Each tuple is (parameter, value of parameter)
         """
         return [(_(field.verbose_name), field.value_to_string(self)) for field in self.display_fields()]
+
+    def get_related_fields(self, using="default"):
+        collector = NestedObjects(using=using)
+        collector.collect([self])
+        return collector.instances_with_model()
 
 
 class BaseModel(models.Model, DisplayFieldsMixin):
