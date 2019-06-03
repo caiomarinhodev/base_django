@@ -26,7 +26,7 @@ UPDATE_SUFFIX = "_update"
 DELETE_SUFFIX = "_delete"
 
 # style = "materialize"
-style = get_from_settings_or_default('BASE_TEMPLATES_FOLDER', "base/bootstrap")
+style = get_from_settings_or_default('BASE_TEMPLATES_FOLDER', "base/flexbox")
 
 
 # Messages
