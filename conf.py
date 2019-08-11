@@ -25,7 +25,7 @@ DETAIL_SUFFIX = "_detail"
 UPDATE_SUFFIX = "_update"
 DELETE_SUFFIX = "_delete"
 
-# style = "materialize"
+API_SUFFIX = "_api"
 style = get_from_settings_or_default('BASE_TEMPLATES_FOLDER', "base/flexbox")
 
 
