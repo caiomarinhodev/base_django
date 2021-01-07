@@ -1,5 +1,7 @@
 from django.contrib.contenttypes import models as contenttypes_models
 from django.contrib.auth import models as auth_models
+from os.path import dirname, abspath, join, exists
+from setuptools import setup
 
 from . import conf
 
@@ -67,3 +69,22 @@ def configure_groups_and_permissions(groups_dict, permissions_dict):
             group = groups[0]
         for permission in group_description.get("permissions", ""):
             group.permissions.add(all_permissions_in_dict_form[permission])
+
+long_description = None
+
+install_reqs = [req for req in open(abspath(join(dirname(__file__), 'requirements.txt')))]
+
+setup(
+    name="base_django",
+    author='caiomarinho.me',
+    version="0.1.0",
+    license='MIT',
+    zip_safe=False,
+    include_package_data=True,
+    install_requires=install_reqs,
+    packages=["base_django"],
+    url="https://github.com/caiomarinhodev/base_django",
+    description="Python base django",
+    long_description=long_description,
+    python_requires='>=3.5'
+)
