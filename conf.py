@@ -17,7 +17,7 @@ def get_from_settings_or_default(var_name, default):
 
 
 # Items by page on paginator views
-ITEMS_BY_PAGE = 12
+ITEMS_BY_PAGE = 10
 
 CREATE_SUFFIX = "_create"
 LIST_SUFFIX = "_list"
